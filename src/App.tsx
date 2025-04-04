@@ -24,7 +24,7 @@ const App = () => {
       });
     });
 
-    return { name: "", fields: formFields };
+    return { name: formJSON.name, fields: formFields };
   };
 
   const handleUpload = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,7 +68,7 @@ const App = () => {
 
   return (
     <div className="bg-gray-500 p-[1in] overflow-auto">
-      <div className="flex flex-col gap-6 p-[0.5in] w-[8.5in] min-h-[11in] mx-auto bg-white">
+      <div className="flex flex-col w-[8.5in] min-h-[11in] mx-auto bg-white">
         <DynamicForm
           form={form}
           eventHandlers={[
