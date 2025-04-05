@@ -3,9 +3,13 @@ import { Icon } from "@vincentbcp/components-library";
 import { IDynamicForm } from "@vincentbcp/dynamic-form/dist/interfaces/IDynamicForm";
 import { IDynamicFormField } from "@vincentbcp/dynamic-form/dist/interfaces/IDynamicFormField";
 import { DynamicForm } from "@vincentbcp/dynamic-form";
+import { IFormValue } from "@vincentbcp/dynamic-form/dist/interfaces/IFormValue";
+import random from "random-string-generator";
 
 const App = () => {
   const [form, setForm] = useState<IDynamicForm>();
+  const [formValue, setFormValue] = useState<IFormValue | IFormValue[]>();
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const transformRawForm = (formJSON: any) => {
@@ -24,7 +28,12 @@ const App = () => {
       });
     });
 
-    return { name: formJSON.name, fields: formFields };
+    return {
+      id: formJSON.id,
+      list: formJSON.list,
+      name: formJSON.name,
+      fields: formFields,
+    };
   };
 
   const handleUpload = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,17 +44,19 @@ const App = () => {
     var reader = new FileReader();
     reader.onload = (e) => {
       try {
-        setForm(transformRawForm(JSON.parse(e?.target?.result as string)));
+        const form = transformRawForm(JSON.parse(e?.target?.result as string));
+        setForm(form);
+        setFormValue(form.list ? [] : { id: random(8), formId: form.id });
       } catch (err) {}
     };
     reader.readAsText(file);
   };
 
   const handleBtnClick = () => {
-    alert("clicked!");
+    console.log(formValue);
   };
 
-  if (!form) {
+  if (!form || !formValue) {
     return (
       <div className="w-screen h-screen flex flex-col items-center justify-center">
         <div
@@ -73,10 +84,12 @@ const App = () => {
           form={form}
           eventHandlers={[
             {
-              fieldId: "BqoG8M6w",
+              fieldId: "VLgxrvUL",
               events: [{ propKey: "onClick", event: handleBtnClick }],
             },
           ]}
+          formValue={formValue}
+          onChange={setFormValue}
         />
       </div>
     </div>
