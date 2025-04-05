@@ -24,14 +24,19 @@ const App = () => {
         delete field["properties"];
         delete field["defaultValues"];
 
-        return { ...field, type };
+        return {
+          ...field,
+          type,
+          value:
+            type === "subForm" ? transformRawForm(field.value) : field.value,
+        };
       });
     });
 
     return {
       id: formJSON.id,
-      list: formJSON.list,
       name: formJSON.name,
+      list: formJSON.list,
       fields: formFields,
     };
   };
