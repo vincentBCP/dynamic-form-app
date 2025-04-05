@@ -87,6 +87,10 @@ const App = () => {
               fieldId: "VLgxrvUL",
               events: [{ propKey: "onClick", event: handleBtnClick }],
             },
+            {
+              fieldId: "AbZ7n51f",
+              events: [{ propKey: "onClick", event: handleBtnClick }],
+            },
           ]}
           formValue={formValue}
           onChange={setFormValue}
