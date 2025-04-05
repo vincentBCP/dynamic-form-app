@@ -57,11 +57,11 @@ const App = () => {
   }
 
   return (
-    <div className="bg-gray-500 p-[1in] overflow-auto relative">
+    <div className="bg-gray-500 p-[1in] overflow-auto">
       <Icon
         icon="upload"
         size={32}
-        className="absolute top-4 right-4 cursor-pointer fill-white"
+        className="fixed top-4 right-4 cursor-pointer fill-white"
         onClick={() => fileInputRef.current?.click()}
       />
       <input
