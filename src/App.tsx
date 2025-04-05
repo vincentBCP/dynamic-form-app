@@ -27,6 +27,8 @@ const App = () => {
       } catch (err) {}
     };
     reader.readAsText(file);
+
+    ev.target.value = "";
   };
 
   const handleBtnClick = () => {
@@ -47,7 +49,7 @@ const App = () => {
             type="file"
             accept="application/json"
             onChange={handleUpload}
-            className="absolute top-[-1000px]"
+            className="hidden"
           />
         </div>
       </div>
@@ -55,7 +57,20 @@ const App = () => {
   }
 
   return (
-    <div className="bg-gray-500 p-[1in] overflow-auto">
+    <div className="bg-gray-500 p-[1in] overflow-auto relative">
+      <Icon
+        icon="upload"
+        size={32}
+        className="absolute top-4 right-4 cursor-pointer fill-white"
+        onClick={() => fileInputRef.current?.click()}
+      />
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="application/json"
+        onChange={handleUpload}
+        className="hidden"
+      />
       <div className="flex flex-col w-[8.5in] min-h-[11in] mx-auto bg-white">
         <DynamicForm
           form={form}
